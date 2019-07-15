@@ -4,6 +4,7 @@ import ExpenseService.Exception.UnexpectedProjectTypeException;
 import ExpenseService.Expense.ExpenseType;
 import ExpenseService.Project.Project;
 import ExpenseService.Project.ProjectType;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,9 +13,13 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 class ExpenseServiceTest {
     @Test
     void should_return_internal_expense_type_if_project_is_internal() throws UnexpectedProjectTypeException {
-        // given
-        // when
-        // then
+
+        Project project = new Project(ProjectType.INTERNAL,"abc");
+
+        ExpenseService service = new ExpenseService();
+        ExpenseType type = service.getExpenseCodeByProjectTypeAndName(project);
+
+        Assertions.assertSame(ExpenseType.INTERNAL_PROJECT_EXPENSE,type);
     }
 
     @Test
